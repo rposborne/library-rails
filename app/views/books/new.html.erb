@@ -1,0 +1,13 @@
+<h1>Add a book to the library</h1>
+
+<%= form_tag add_book_url do %>
+  <label>
+    Title:
+    <input type="text" name="book_title">
+  </label>
+  <label>
+    Author: 
+    <input type="text" name="book_author">
+  </label>
+  <button>Add</button>
+<% end %>

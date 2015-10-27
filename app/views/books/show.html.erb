@@ -1,0 +1,20 @@
+<h4><%= @book.title %> by <%= @book.author %></h4>
+
+<table class="table table-condensed table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Checked Out By</th>
+      <th>Date Checked Out</th>
+      <th>Date Returned</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @checkouts.each do |c| %>
+      <tr>
+        <td> <%= (User.find c.user_id).name %> </td>
+        <td> <%= c.created_at %> </td>
+        <td> <%= c.updated_at %> </td> 
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,36 @@
+<table class="table table-condensed table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Checkout</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @books.each do |b| %>
+      <tr>
+        <td><%= link_to "#{b.title}", "/books/#{b.id}" %></td>
+        <td> <%= b.author %> </td>
+        <td>
+          <% if ! b.checked_out %>
+            <%= form_tag "/books/#{b.id}/checkouts", method: :POST do %>
+              <button class="btn btn-default">Checkout</button>
+            <% end %>
+          <% elsif b.user_who_has == current_user %>
+            <%= form_tag "/books/#{b.id}/return", method: :POST do %>
+              <button class="btn btn-default">Return</button>
+            <% end %>
+          <% else %>
+            Checked out by <%= b.user_who_has.name %>
+          <% end %>
+        </td>
+        <td>
+          <%= form_tag "/books/#{b.id}", method: :DELETE do %>
+              <button class="btn btn-default">Delete Book</button>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
